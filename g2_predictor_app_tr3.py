@@ -27,11 +27,11 @@ if os.path.exists(log_file):
 else:
     existing = pd.DataFrame(columns=[
         "Date", "Time", "User_Name", "Polymer_Grade",
-        "A_LC", "B_MFR_S205", "C_MFR_S206", "D_MFR_S402C",
-        "Predicted_NNI", "Log_Timestamp"  # ✅ เพิ่ม column
+        "A_LC", "B_MFR_S205", "C_MFR_S206", "D_MFR_S411",
+        "Predicted_G2", "Log_Timestamp"  # ✅ เพิ่ม column
     ])
 
-st.title("🔬 NNI HDPE1 Tr-3 Prediction 1.0")
+st.title("🔬 G2 HDPE1 Tr-3 Prediction 1.0")
 st.markdown(f"**Model Type:** `{model_name}`")
 
 # -------- ฟอร์มอินพุต --------
@@ -59,7 +59,7 @@ with st.form("predict_form"):
             X_scaled = scaler.transform(X)
             pred = float(model.predict(X_scaled)[0])
 
-            st.success(f"🔮 Predicted NNI = `{pred:.2f}`")
+            st.success(f"🔮 Predicted G2 = `{pred:.2f}`")
 
             # ✅ สร้าง timestamp เวลาไทย
             thai_time = datetime.now(pytz.timezone("Asia/Bangkok"))
@@ -74,7 +74,7 @@ with st.form("predict_form"):
                 "B_MFR_S205": b,
                 "C_MFR_S206": c,
                 "D_MFR_S402C": d,
-                "Predicted_NNI": pred,
+                "Predicted_G2": pred,
                 "Log_Timestamp": log_ts  # ✅ เพิ่ม timestamp column
             }
 
